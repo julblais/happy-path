@@ -1,20 +1,18 @@
-﻿<div class="category-content">
+﻿<div class="entry">
     <input type="checkbox" id="id_happy" class="btn-check">
-    <label class="btn btn-success" for="id_happy">
+    <label class="btn btn-success choice-button" for="id_happy">
         <div class="emoji">😃</div>
     </label>
 
     <input type="checkbox" id="id_neutral" class="btn-check">
-    <label class="btn btn-info" for="id_neutral">
+    <label class="btn btn-info choice-button" for="id_neutral">
         <div class="emoji">😐</div>
     </label>
 
     <input type="checkbox" id="id_sad" class="btn-check">
-    <label class="btn btn-danger" for="id_sad">
-        <div class="emoji">☹️</div>
-    </label>
+    <label class="btn btn-danger choice-button" for="id_sad">☹️</label>
 
-    <div class="form-control reason" contentEditable="plaintext-only"></div>
+    <input class="form-control reason" type="text" id="name" name="reason" />
 </div>
 
 @code {

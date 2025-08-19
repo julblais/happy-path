@@ -1,33 +1,26 @@
-﻿.categories-table {
+﻿.categories {
+}
+
+.category{
+    
+}
+
+.entry {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr 1fr 1fr 4fr;
     gap: 1rem;
 }
 
-.category-name {
-    font-weight: bold;
+.choice-button {
+    font-size: 1.3rem;
     align-content: center;
-}
-
-.category-content {
-    display: flex;
-    flex-direction: row;
-    gap: 0.3rem;
-}
-
-.emoji {
-    font-size: 2rem;
-    vertical-align: middle;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
 .reason {
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
     border: gray 2px solid;
-    padding: 0.5rem;
     resize: none;
-    
+    display: flex;
 }
 
 .reason[contenteditable="true"] {
