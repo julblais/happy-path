@@ -1,0 +1,27 @@
+﻿@using HappyPath.Model
+
+<div class="entry" >
+    <InputRadioGroup @bind-Value="SelectedMood">
+        <div class="btn-group choices-group" role="group">
+            <InputRadio id="@GetId("happy")" Value="Mood.Happy" class="btn-check"/>
+            <label class="btn btn-outline-success choice-button" for="@GetId("happy")">😀</label>
+
+            <InputRadio id="@GetId("neutral")" Value="Mood.Neutral" class="btn-check"/>
+            <label class="btn btn-outline-info choice-button" for="@GetId("neutral")">😐</label>
+
+            <InputRadio id="@GetId("sad")" Value="Mood.Sad" class="btn-check"/>
+            <label class="btn btn-outline-danger choice-button" for="@GetId("sad")">😞</label>
+        </div>
+    </InputRadioGroup>
+    <input class="form-control reason" type="text" id="name" name="reason" @bind="Reason"/>
+</div>
+
+@code {
+    public Mood SelectedMood { get; set; } = Mood.Neutral;
+    public string Reason { get; set; } = string.Empty;
+    
+    static int s_NextId = 0;
+    readonly int m_Id = ++s_NextId;
+    
+    string GetId(string name) => $"{name}-{m_Id}";
+}

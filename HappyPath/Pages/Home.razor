@@ -1,7 +1,31 @@
 ﻿@page "/"
+@using System.Text.Json
+@using HappyPath.Components
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Happy Path</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Happy Path!😊</h1>
 
-Welcome to your new app.
+<CategoriesComponent @ref="m_Categories" Categories="@Categories"></CategoriesComponent>
+
+<button class="btn btn-primary" @onclick="Callback">Send!</button>
+
+@code {
+    static readonly List<string> Categories =
+    [
+        "Work",
+        "Personal",
+        "Health",
+        "Hobbies"
+    ];
+
+    CategoriesComponent m_Categories;
+
+    void Callback()
+    {
+        var results = m_Categories.GetResults();
+
+        var outp = JsonSerializer.Serialize(results);
+        Console.WriteLine(outp);
+    }
+}

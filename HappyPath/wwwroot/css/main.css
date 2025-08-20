@@ -1,0 +1,28 @@
+﻿.categories {
+}
+
+.category{
+    
+}
+
+.entry {
+    display: flex;
+    flex-direction: row;
+    gap : 5px;
+}
+
+.choice-button {
+    font-size: 1.3rem;
+    align-content: center;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.reason {
+    padding-left: 10px;
+    border: gray 2px solid;
+    resize: none;
+    display: flex;
+}
+
+.reason[contenteditable="true"] {
+}
