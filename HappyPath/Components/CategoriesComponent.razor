@@ -10,11 +10,11 @@
     [Parameter]
     public List<string> Categories { get; set; } = [];
     
-    private List<CategoryComponent> m_Refs = [];
+    readonly List<CategoryComponent> m_Refs = [];
     public CategoryComponent Ref { set => m_Refs.Add(value); }
 
-    public IReadOnlyDictionary<string, Mood> GetResults()
+    public IReadOnlyDictionary<string, Result> GetResults()
     {
-        return m_Refs.ToDictionary(component => component.Category, component => component.GetMood);
+        return m_Refs.ToDictionary(component => component.Category, component => component.Result);
     }
 }

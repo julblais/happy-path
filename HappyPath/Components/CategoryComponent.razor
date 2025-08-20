@@ -13,5 +13,7 @@
 
     MoodComponent m_Component;
     
-    public Mood GetMood => m_Component.SelectedMood;
+    public Mood Mood => m_Component.SelectedMood;
+    public string Reason => m_Component.Reason;
+    public Result Result => new() { mood = Mood, reason = Reason };
 }
