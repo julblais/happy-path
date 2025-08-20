@@ -1,19 +1,26 @@
-﻿<div class="entry" >
-    <div class="btn-group choices-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="@GetGroup("group")" id="@GetId("good")" autocomplete="off">
-        <label class="btn btn-outline-success choice-button" for="@GetId("good")">😀</label>
-        <input type="radio" class="btn-check" name="@GetGroup("group")" id="@GetId("neutral")" autocomplete="off" checked>
-        <label class="btn btn-outline-info choice-button" for="@GetId("neutral")">😐</label>
-        <input type="radio" class="btn-check" name="@GetGroup("group")" id="@GetId("sad")" autocomplete="off">
-        <label class="btn btn-outline-danger choice-button" for="@GetId("sad")">😞</label>
-    </div>
+﻿@using HappyPath.Model
+
+<div class="entry" >
+    <InputRadioGroup @bind-Value="SelectedMood">
+        <div class="btn-group choices-group" role="group">
+            <InputRadio id="@GetId("happy")" Value="Mood.Happy" class="btn-check"/>
+            <label class="btn btn-outline-success choice-button" for="@GetId("happy")">😀</label>
+
+            <InputRadio id="@GetId("neutral")" Value="Mood.Neutral" class="btn-check"/>
+            <label class="btn btn-outline-info choice-button" for="@GetId("neutral")">😐</label>
+
+            <InputRadio id="@GetId("sad")" Value="Mood.Sad" class="btn-check"/>
+            <label class="btn btn-outline-danger choice-button" for="@GetId("sad")">😞</label>
+        </div>
+    </InputRadioGroup>
     <input class="form-control reason" type="text" id="name" name="reason"/>
 </div>
 
 @code {
+    public Mood SelectedMood { get; set; } = Mood.Neutral;
+    
     static int s_NextId = 0;
     readonly int m_Id = ++s_NextId;
     
-    string GetGroup(string group) => $"{group}-{m_Id}";
     string GetId(string name) => $"{name}-{m_Id}";
 }
