@@ -1,31 +1,88 @@
 ﻿@page "/"
 @using System.Text.Json
 @using HappyPath.Components
+@using HappyPath.Providers
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+@inject HttpClient HttpClient
 
 <PageTitle>Happy Path</PageTitle>
 
-<h1>Happy Path!😊</h1>
+<div class="header">
+    <div class="title">
+        <h1>Happy Path!</h1>
+        <h1 class="smile">😊</h1>
+    </div>
+    <div class="resetButton">
+        <ResetComponent></ResetComponent>
+    </div>
+</div>
 
-<CategoriesComponent @ref="m_Categories" Categories="@Categories"></CategoriesComponent>
-
-<button class="btn btn-primary" @onclick="Callback">Send!</button>
+@if (m_State == State.LoadingSettings)
+{
+    <LoaderComponent Message="Fetching local settings..."></LoaderComponent>
+}
+else if (m_State == State.WaitingForUrl)
+{
+    <InputUrl UrlChanged="OnUrlChanged"></InputUrl>
+}
+else if (m_State == State.LoadingData)
+{
+    <LoaderComponent Message="Loading..."></LoaderComponent>
+}
+else if (m_State == State.Ready)
+{
+    <CategoriesComponent @ref="m_Content" Categories="@m_Categories"></CategoriesComponent>
+    <button class="btn btn-primary" @onclick="Callback">Send!</button>
+}
 
 @code {
-    static readonly List<string> Categories =
-    [
-        "Work",
-        "Personal",
-        "Health",
-        "Hobbies"
-    ];
 
-    CategoriesComponent m_Categories;
+    enum State
+    {
+        LoadingSettings,
+        WaitingForUrl,
+        LoadingData,
+        Ready
+    }
+    
+    CategoriesComponent m_Content;
+    State m_State = State.LoadingSettings;
+    MoodProvider m_MoodProvider;
+    IEnumerable<string> m_Categories;
 
     void Callback()
     {
-        var results = m_Categories.GetResults();
+        var results = m_Content.BuildResults();
 
         var outp = JsonSerializer.Serialize(results);
         Console.WriteLine(outp);
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchData();
+    }
+
+    async Task FetchData()
+    {
+        var apiUrl = await StorageProvider.GetApiUrlAsync(LocalStorage);
+        if (apiUrl == null)
+        {
+            m_State = State.WaitingForUrl;
+            return;
+        }
+        
+        m_State = State.LoadingData;
+        StateHasChanged();
+        
+        m_MoodProvider = new MoodProvider(HttpClient, apiUrl);
+        m_Categories = await m_MoodProvider.FetchCategories();
+        m_State = State.Ready;
+        StateHasChanged();
+    }
+
+    async Task OnUrlChanged(Uri url)
+    {
+        await InvokeAsync(FetchData);
     }
 }
