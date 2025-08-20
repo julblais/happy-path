@@ -5,7 +5,14 @@
 
 <h1>Happy Path!😊</h1>
 
-<div class="categories">
-    <CategoryComponent Category="Category 1"></CategoryComponent>
-    <CategoryComponent Category="Category 2"></CategoryComponent>
-</div>
+<CategoriesComponent Categories="@Categories"></CategoriesComponent>
+
+@code {
+    static readonly List<string> Categories =
+    [
+        "Work",
+        "Personal",
+        "Health",
+        "Hobbies"
+    ];
+}

@@ -1,11 +1,17 @@
-﻿<div class="card border-dark mb-3 category">
+﻿@using HappyPath.Model
+
+<div class="card border-dark mb-3 category">
     <div class="card-header">@Category</div>
     <div class="card-body">
-        <MoodComponent></MoodComponent>
+        <MoodComponent @ref="m_Component"></MoodComponent>
     </div>
 </div>
 
 @code {
     [Parameter]
     public string Category { get; set; }
+
+    MoodComponent m_Component;
+    
+    public Mood GetMood => m_Component.SelectedMood;
 }

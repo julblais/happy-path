@@ -1,0 +1,11 @@
+﻿<div class="categories">
+    @foreach(var category in Categories)
+    {
+        <CategoryComponent Category="@category"></CategoryComponent>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public List<string> Categories { get; set; } = [];
+}
