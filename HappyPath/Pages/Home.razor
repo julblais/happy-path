@@ -32,7 +32,23 @@ else if (m_State == State.LoadingData)
 else if (m_State == State.Ready)
 {
     <CategoriesComponent @ref="m_Content" Categories="@m_Categories"></CategoriesComponent>
-    <button class="btn btn-primary" @onclick="Callback">Send!</button>
+    <button class="btn btn-primary mt-3" disabled=@m_IsSendingResults @onclick="OnSendResults">Send!</button>
+}
+else if (m_State == State.ResultsSent)
+{
+    <div class="card border-success" style="max-width: 30rem;">
+        <div class="card-body">
+            <p class="card-text">Results sent successfully!</p>
+        </div>
+    </div>
+}
+else if (m_State == State.Error)
+{
+    <div class="card border-danger-subtle" style="max-width: 30rem;">
+        <div class="card-body">
+            <p class="card-text">Error: @m_Error</p>
+        </div>
+    </div>
 }
 
 @code {
@@ -42,21 +58,17 @@ else if (m_State == State.Ready)
         LoadingSettings,
         WaitingForUrl,
         LoadingData,
-        Ready
+        Ready,
+        ResultsSent,
+        Error
     }
     
     CategoriesComponent m_Content;
     State m_State = State.LoadingSettings;
     MoodProvider m_MoodProvider;
     IEnumerable<string> m_Categories;
-
-    void Callback()
-    {
-        var results = m_Content.BuildResults();
-
-        var outp = JsonSerializer.Serialize(results);
-        Console.WriteLine(outp);
-    }
+    string m_Error;
+    bool m_IsSendingResults = false;
     
     protected override async Task OnInitializedAsync()
     {
@@ -74,15 +86,42 @@ else if (m_State == State.Ready)
         
         m_State = State.LoadingData;
         StateHasChanged();
-        
+
         m_MoodProvider = new MoodProvider(HttpClient, apiUrl);
-        m_Categories = await m_MoodProvider.FetchCategories();
-        m_State = State.Ready;
+        (var error, m_Categories) = await m_MoodProvider.FetchCategories();
+        
+        if (error == null)
+        {
+            m_State = State.Ready;
+        }
+        else
+        {
+            m_Error = error;
+            m_State = State.Error;
+        }
         StateHasChanged();
     }
 
     async Task OnUrlChanged(Uri url)
     {
         await InvokeAsync(FetchData);
+    }
+    
+    async Task OnSendResults()
+    {
+        m_IsSendingResults = true;
+        var results = m_Content.BuildResults().ToList();
+        Console.WriteLine(JsonSerializer.Serialize(results));
+        var result = await m_MoodProvider.SendResult(results);
+
+        if (result == null)
+            m_State = State.ResultsSent;
+        else
+        {
+            m_State = State.Error;
+            m_Error = result;
+        }
+
+        StateHasChanged();
     }
 }
