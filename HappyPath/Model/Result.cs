@@ -1,7 +1,15 @@
-﻿namespace HappyPath.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace HappyPath.Model;
 
 public readonly record struct Result
 {
-    public Mood mood { get; init; }
-    public string reason { get; init; }
+    [JsonPropertyName("category")]
+    public string Category { get; init; }
+    
+    [JsonPropertyName("mood")]
+    public Mood Mood { get; init; }
+    
+    [JsonPropertyName("reason")]
+    public string Reason { get; init; }
 }
