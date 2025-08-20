@@ -1,11 +1,20 @@
-﻿<div class="categories">
+﻿@using HappyPath.Model
+<div class="categories">
     @foreach(var category in Categories)
     {
-        <CategoryComponent Category="@category"></CategoryComponent>
+        <CategoryComponent @ref="@Ref" Category="@category"></CategoryComponent>
     }
 </div>
 
 @code {
     [Parameter]
     public List<string> Categories { get; set; } = [];
+    
+    private List<CategoryComponent> m_Refs = [];
+    public CategoryComponent Ref { set => m_Refs.Add(value); }
+
+    public IReadOnlyDictionary<string, Mood> GetResults()
+    {
+        return m_Refs.ToDictionary(component => component.Category, component => component.GetMood);
+    }
 }

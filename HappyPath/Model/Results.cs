@@ -1,3 +1,6 @@
 ﻿namespace HappyPath.Model;
 
-public record Results();
+public readonly record struct Results
+{
+    //public IReadOnlyDictionary<string, Mood> Results { get; init; }
+}
