@@ -13,18 +13,18 @@ public class MoodProvider(HttpClient client, Uri uri)
         "Date", "Reason", "Raison"
     ];
     
-    public async Task<(string error, IEnumerable<string>)> FetchCategories()
+    public async Task<(string error, string[])> FetchCategories()
     {
         await Task.Delay(1000);
         try
         {
             var result = await client.GetFromJsonAsync(uri, m_Context.StringArray);
-            return (null, result.Except(ExcludedCategories));
+            return (null, result.Except(ExcludedCategories).ToArray());
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error sending results: {ex.Message}");
-            return (ex.Message, new List<string>());
+            return (ex.Message, []);
         }
     }
 
