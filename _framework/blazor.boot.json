@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "HappyPath",
   "resources": {
-    "hash": "sha256-hR/DQhRLKeGQZjxN3Pk5g5R1afFBREH8RxCC1PhcYuU=",
+    "hash": "sha256-Pd6aoTgK9Nf2s9Jo5I/uhRR3BVQ/3Q/tK/9aaGQkkGc=",
     "fingerprinting": {
       "Blazored.LocalStorage.38qqn0cc96.wasm": "Blazored.LocalStorage.wasm",
       "Microsoft.AspNetCore.Components.6tp75xxaz0.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -34,7 +34,7 @@
       "System.Text.Json.h6jruwiato.wasm": "System.Text.Json.wasm",
       "System.Text.RegularExpressions.j5idjixed0.wasm": "System.Text.RegularExpressions.wasm",
       "System.Private.CoreLib.pj6od3bcfw.wasm": "System.Private.CoreLib.wasm",
-      "HappyPath.qv73gb8538.wasm": "HappyPath.wasm",
+      "HappyPath.1n4apbu39n.wasm": "HappyPath.wasm",
       "dotnet.native.4kpiqsp2xj.js": "dotnet.native.js",
       "dotnet.native.bjdonifdn2.wasm": "dotnet.native.wasm",
       "dotnet.js": "dotnet.js",
@@ -83,7 +83,7 @@
       "System.Text.Encodings.Web.yosxql6jn5.wasm": "sha256-fgKqJw0Vkd2XqqB/Aj8WLXZK9/DPfEX9FcsrTzQTRFU=",
       "System.Text.Json.h6jruwiato.wasm": "sha256-J2h8It3KEE7eVU+nR3IyBWHVxVMv0KvA7MTuDKKmYtc=",
       "System.Text.RegularExpressions.j5idjixed0.wasm": "sha256-J6gVQlJLN+R0E5iZkmnNo2oa+uAfRpd0gqBpGPI8sdc=",
-      "HappyPath.qv73gb8538.wasm": "sha256-piYUeaKEZCJOUdAKJm6y3df+MRDRc8FYo9/HBZ5w+7g="
+      "HappyPath.1n4apbu39n.wasm": "sha256-A2WPuZb366OW81HGhSqvFZKISxne+wLEyDr0ORvKtJ4="
     }
   },
   "cacheBootResources": true,
