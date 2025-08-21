@@ -22,7 +22,7 @@ jobs:
       - name: Echo tag name
         run: echo "Tag name - ${{github.ref_name}}"
       - name: Download webapp build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: webApp
           path: release/
@@ -30,11 +30,11 @@ jobs:
       - name: Change base-tag in index.html
         run: sed -i 's/<base href="\/" \/>/<base href="\/happyPath\/" \/>/g' release/wwwroot/index.html
       - name: Commit wwwroot to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.7
         with:
           branch: gh-pages
           folder: release/wwwroot
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2.3
         with:
           files: ./release/wwwroot/**
