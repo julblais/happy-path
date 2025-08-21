@@ -1,5 +1,4 @@
-﻿@using System.Diagnostics.CodeAnalysis
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 <div class="page">
     <main>
         <article class="content px-4">
@@ -7,9 +6,3 @@
         </article>
     </main>
 </div>
-
-@code {
-    
-    [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(MainLayout))]
-    public MainLayout() { }
-}

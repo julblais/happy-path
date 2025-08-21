@@ -1,4 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
 using Blazored.LocalStorage;
+using HappyPath.Layout;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -6,6 +8,7 @@ namespace HappyPath
 {
     public static class Program
     {
+        [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(MainLayout))]
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
