@@ -111,7 +111,6 @@ else if (m_State == State.Error)
     {
         m_IsSendingResults = true;
         var results = m_Content.BuildResults().ToList();
-        Console.WriteLine(JsonSerializer.Serialize(results));
         var result = await m_MoodProvider.SendResult(results);
 
         if (result == null)

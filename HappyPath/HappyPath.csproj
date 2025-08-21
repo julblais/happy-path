@@ -5,12 +5,30 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>13</LangVersion>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantTimezone>true</InvariantTimezone>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <TrimMode>full</TrimMode>
+      <PublishTrimmed>true</PublishTrimmed>
+      <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+      <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.8" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\.github\workflows\ci.yml">
+      <Link>ci.yml</Link>
+    </Content>
+    <Content Include="..\.github\workflows\release.yml">
+      <Link>release.yml</Link>
+    </Content>
   </ItemGroup>
 
 </Project>

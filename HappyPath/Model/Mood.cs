@@ -2,7 +2,7 @@
 
 namespace HappyPath.Model;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Mood>))]
 public enum Mood
 {
     [JsonStringEnumMemberName("happy")]
