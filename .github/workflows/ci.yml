@@ -10,6 +10,8 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 9.x
+      - name: Install wasm
+        run: dotnet workload install wasm-tools
       - name: Publish .NET Core Project
         run: dotnet publish HappyPath/HappyPath.csproj -c Release -o release --nologo
       # Upload artifacts
