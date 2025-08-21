@@ -1,0 +1,29 @@
+﻿@using HappyPath.Providers
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+@inject NavigationManager NavigationManager
+
+@if (m_State == State.Reset)
+{
+    <button class="btn btn-sm btn-outline-danger" @onclick="() => m_State = State.Confirm">Reset</button>
+}
+else if (m_State == State.Confirm)
+{
+    <button class="btn btn-sm btn-outline-danger" @onclick="OnReset">Sure?</button>
+}
+
+@code {
+
+    enum State
+    {
+        Reset,
+        Confirm
+    }
+
+    State m_State = State.Reset;
+
+    async Task OnReset()
+    {
+        await StorageProvider.Reset(LocalStorage);
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+}

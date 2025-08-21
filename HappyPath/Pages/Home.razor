@@ -1,31 +1,127 @@
 ﻿@page "/"
 @using System.Text.Json
 @using HappyPath.Components
+@using HappyPath.Providers
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+@inject HttpClient HttpClient
 
 <PageTitle>Happy Path</PageTitle>
 
-<h1>Happy Path!😊</h1>
+<div class="header">
+    <div class="title">
+        <h1>Happy Path!</h1>
+        <h1 class="smile">😊</h1>
+    </div>
+    <div class="resetButton">
+        <ResetComponent></ResetComponent>
+    </div>
+</div>
 
-<CategoriesComponent @ref="m_Categories" Categories="@Categories"></CategoriesComponent>
-
-<button class="btn btn-primary" @onclick="Callback">Send!</button>
+@if (m_State == State.LoadingSettings)
+{
+    <LoaderComponent Message="Fetching local settings..."></LoaderComponent>
+}
+else if (m_State == State.WaitingForUrl)
+{
+    <InputUrl UrlChanged="OnUrlChanged"></InputUrl>
+}
+else if (m_State == State.LoadingData)
+{
+    <LoaderComponent Message="Loading..."></LoaderComponent>
+}
+else if (m_State == State.Ready)
+{
+    <CategoriesComponent @ref="m_Content" Categories="@m_Categories"></CategoriesComponent>
+    <button class="btn btn-primary mt-3" disabled=@m_IsSendingResults @onclick="OnSendResults">Send!</button>
+}
+else if (m_State == State.ResultsSent)
+{
+    <div class="card border-success" style="max-width: 30rem;">
+        <div class="card-body">
+            <p class="card-text">Results sent successfully!</p>
+        </div>
+    </div>
+}
+else if (m_State == State.Error)
+{
+    <div class="card border-danger-subtle" style="max-width: 30rem;">
+        <div class="card-body">
+            <p class="card-text">Error: @m_Error</p>
+        </div>
+    </div>
+}
 
 @code {
-    static readonly List<string> Categories =
-    [
-        "Work",
-        "Personal",
-        "Health",
-        "Hobbies"
-    ];
 
-    CategoriesComponent m_Categories;
-
-    void Callback()
+    enum State
     {
-        var results = m_Categories.GetResults();
+        LoadingSettings,
+        WaitingForUrl,
+        LoadingData,
+        Ready,
+        ResultsSent,
+        Error
+    }
+    
+    CategoriesComponent m_Content;
+    State m_State = State.LoadingSettings;
+    MoodProvider m_MoodProvider;
+    IEnumerable<string> m_Categories;
+    string m_Error;
+    bool m_IsSendingResults = false;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchData();
+    }
 
-        var outp = JsonSerializer.Serialize(results);
-        Console.WriteLine(outp);
+    async Task FetchData()
+    {
+        var apiUrl = await StorageProvider.GetApiUrlAsync(LocalStorage);
+        if (apiUrl == null)
+        {
+            m_State = State.WaitingForUrl;
+            return;
+        }
+        
+        m_State = State.LoadingData;
+        StateHasChanged();
+
+        m_MoodProvider = new MoodProvider(HttpClient, apiUrl);
+        (var error, m_Categories) = await m_MoodProvider.FetchCategories();
+        
+        if (error == null)
+        {
+            m_State = State.Ready;
+        }
+        else
+        {
+            m_Error = error;
+            m_State = State.Error;
+        }
+        StateHasChanged();
+    }
+
+    async Task OnUrlChanged(Uri url)
+    {
+        await InvokeAsync(FetchData);
+    }
+    
+    async Task OnSendResults()
+    {
+        m_IsSendingResults = true;
+        var results = m_Content.BuildResults().ToList();
+        Console.WriteLine(JsonSerializer.Serialize(results));
+        var result = await m_MoodProvider.SendResult(results);
+
+        if (result == null)
+            m_State = State.ResultsSent;
+        else
+        {
+            m_State = State.Error;
+            m_Error = result;
+        }
+
+        StateHasChanged();
     }
 }

@@ -7,14 +7,11 @@
 </div>
 
 @code {
-    [Parameter]
-    public List<string> Categories { get; set; } = [];
+    [Parameter] public IEnumerable<string> Categories { get; set; } = [];
     
     readonly List<CategoryComponent> m_Refs = [];
-    public CategoryComponent Ref { set => m_Refs.Add(value); }
+    CategoryComponent Ref { set => m_Refs.Add(value); }
 
-    public IReadOnlyDictionary<string, Result> GetResults()
-    {
-        return m_Refs.ToDictionary(component => component.Category, component => component.Result);
-    }
+    public IEnumerable<Result> BuildResults() => m_Refs.Select(c => c.Result);
+    public void SetCategories(IEnumerable<string> categories) => Categories = categories;
 }

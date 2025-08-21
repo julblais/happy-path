@@ -1,0 +1,31 @@
+﻿@using HappyPath.Providers
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+
+<label class="col-form-label" for="input-url">Google Sheets URL:</label>
+<input class="form-control" type="text" id="input-url" @bind="m_Url"/>
+<button class="btn btn-primary mt-2" @onclick="OnApply">Apply</button>
+
+@code {
+    
+    [Parameter]
+    public Uri Url { get; set; }
+    
+    [Parameter]
+    public EventCallback<Uri> UrlChanged { get; set; }
+    
+    string m_Url { get; set; }
+    
+    async Task OnApply()
+    {
+        try
+        {
+            var uri = new Uri(m_Url);
+            await StorageProvider.SetApiUrlAsync(LocalStorage, uri);
+            await UrlChanged.InvokeAsync(uri);
+        }
+        catch
+        {
+            m_Url = string.Empty;
+        }
+    }
+}

@@ -8,12 +8,10 @@
 </div>
 
 @code {
-    [Parameter]
-    public string Category { get; set; }
-
     MoodComponent m_Component;
     
+    [Parameter] public string Category { get; set; }
     public Mood Mood => m_Component.SelectedMood;
     public string Reason => m_Component.Reason;
-    public Result Result => new() { mood = Mood, reason = Reason };
+    public Result Result => new() { Mood = Mood, Reason = Reason, Category = Category };
 }
