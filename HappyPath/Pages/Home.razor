@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using System.Text.Json
+
 @using HappyPath.Components
 @using HappyPath.Providers
 @inject Blazored.LocalStorage.ILocalStorageService LocalStorage
@@ -66,7 +66,7 @@ else if (m_State == State.Error)
     CategoriesComponent m_Content;
     State m_State = State.LoadingSettings;
     MoodProvider m_MoodProvider;
-    IEnumerable<string> m_Categories;
+    string[] m_Categories;
     string m_Error;
     bool m_IsSendingResults = false;
     
@@ -88,17 +88,27 @@ else if (m_State == State.Error)
         StateHasChanged();
 
         m_MoodProvider = new MoodProvider(HttpClient, apiUrl);
-        (var error, m_Categories) = await m_MoodProvider.FetchCategories();
-        
-        if (error == null)
+        var cached = await StorageProvider.GetCachedCategories(LocalStorage);
+        if (cached != null)
         {
+            m_Categories = cached;
             m_State = State.Ready;
         }
         else
         {
-            m_Error = error;
-            m_State = State.Error;
+            (var error, m_Categories) = await m_MoodProvider.FetchCategories();
+            if (error == null)
+            {
+                await StorageProvider.SetCachedCategories(LocalStorage, m_Categories);
+                m_State = State.Ready;
+            }
+            else
+            {
+                m_Error = error;
+                m_State = State.Error;
+            }
         }
+
         StateHasChanged();
     }
 
