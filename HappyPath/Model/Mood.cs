@@ -5,10 +5,10 @@ namespace HappyPath.Model;
 [JsonConverter(typeof(JsonStringEnumConverter<Mood>))]
 public enum Mood
 {
-    [JsonStringEnumMemberName("happy")]
+    [JsonStringEnumMemberName("neutral")]
     Neutral = 0,
     
-    [JsonStringEnumMemberName("neutral")]
+    [JsonStringEnumMemberName("happy")]
     Happy,
     
     [JsonStringEnumMemberName("sad")]
