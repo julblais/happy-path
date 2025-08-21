@@ -28,7 +28,7 @@ jobs:
           path: release/
       # changes the base-tag in index.html from '/' to match GitHub Pages repository subdirectory
       - name: Change base-tag in index.html
-        run: sed -i 's/<base href="\/" \/>/<base href="\/happyPath\/" \/>/g' release/wwwroot/index.html
+        run: sed -i 's/<base href="\/" \/>/<base href="\/happy-path\/" \/>/g' release/wwwroot/index.html
       - name: Commit wwwroot to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
