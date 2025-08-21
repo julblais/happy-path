@@ -34,7 +34,11 @@ jobs:
         with:
           branch: gh-pages
           folder: release/wwwroot
+      - name: Create zip file
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r wwwroot.zip ./release/wwwroot
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./release/wwwroot/**
+          files: wwwroot.zip
