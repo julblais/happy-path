@@ -33,7 +33,7 @@ public class MoodProvider(HttpClient client, Uri uri)
         await Task.Delay(1000);
         try
         {
-            var content = JsonSerializer.Serialize(results, m_Context.Result);
+            var content = JsonSerializer.Serialize(results.ToArray(), m_Context.ResultArray);
             Console.WriteLine("Sending: " + content);
             HttpContent c = new StringContent(content);
             var result = await client.PostAsync(uri, c);
