@@ -7,6 +7,7 @@
     <LangVersion>13</LangVersion>
     <InvariantGlobalization>true</InvariantGlobalization>
     <InvariantTimezone>true</InvariantTimezone>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -29,6 +30,11 @@
     <Content Include="..\.github\workflows\release.yml">
       <Link>release.yml</Link>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+      <ServiceWorker Include="wwwroot\service-worker.js"
+                     PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
 
 </Project>
