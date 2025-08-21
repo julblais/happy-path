@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <TrimMode>full</TrimMode>
+      <TrimMode>partial</TrimMode>
       <PublishTrimmed>true</PublishTrimmed>
       <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
       <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
