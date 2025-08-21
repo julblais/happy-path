@@ -1,0 +1,21 @@
+on: 
+  - pull_request
+  - workflow_call
+jobs:
+  Build-web-app:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.x
+      - name: Publish .NET Core Project
+        run: dotnet publish HappyPath/HappyPath.csproj -c Release -o release --nologo
+      # Upload artifacts
+      - name: Send Artifacts
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: webApp
+          path: |
+            ./release/
