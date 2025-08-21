@@ -1,15 +1,15 @@
 ﻿@using HappyPath.Model
 
 <div class="entry" >
-    <InputRadioGroup @bind-Value="SelectedMood">
+    <InputRadioGroup TValue="Mood" @bind-Value="SelectedMood">
         <div class="btn-group choices-group" role="group">
-            <InputRadio id="@GetId("happy")" Value="Mood.Happy" class="btn-check"/>
+            <InputRadio TValue="Mood" id="@GetId("happy")" Value="Mood.Happy" class="btn-check"/>
             <label class="btn btn-outline-success choice-button" for="@GetId("happy")">😀</label>
 
-            <InputRadio id="@GetId("neutral")" Value="Mood.Neutral" class="btn-check"/>
+            <InputRadio TValue="Mood" id="@GetId("neutral")" Value="Mood.Neutral" class="btn-check"/>
             <label class="btn btn-outline-info choice-button" for="@GetId("neutral")">😐</label>
 
-            <InputRadio id="@GetId("sad")" Value="Mood.Sad" class="btn-check"/>
+            <InputRadio TValue="Mood" id="@GetId("sad")" Value="Mood.Sad" class="btn-check"/>
             <label class="btn btn-outline-danger choice-button" for="@GetId("sad")">😞</label>
         </div>
     </InputRadioGroup>

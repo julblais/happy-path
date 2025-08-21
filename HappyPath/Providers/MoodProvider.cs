@@ -6,6 +6,8 @@ namespace HappyPath.Providers;
 
 public class MoodProvider(HttpClient client, Uri uri)
 {
+    readonly SourceGenerationContext m_Context = new();
+    
     static string[] ExcludedCategories =
     [
         "Date", "Reason", "Raison"
@@ -16,7 +18,7 @@ public class MoodProvider(HttpClient client, Uri uri)
         await Task.Delay(1000);
         try
         {
-            var result = await client.GetFromJsonAsync<string[]>(uri);
+            var result = await client.GetFromJsonAsync(uri, m_Context.StringArray);
             return (null, result.Except(ExcludedCategories));
         }
         catch (Exception ex)
@@ -31,7 +33,8 @@ public class MoodProvider(HttpClient client, Uri uri)
         await Task.Delay(1000);
         try
         {
-            var content = JsonSerializer.Serialize(results);
+            var content = JsonSerializer.Serialize(results, m_Context.Result);
+            Console.WriteLine("Sending: " + content);
             HttpContent c = new StringContent(content);
             var result = await client.PostAsync(uri, c);
             return result.IsSuccessStatusCode ? null : result.ReasonPhrase;

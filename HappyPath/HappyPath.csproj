@@ -12,6 +12,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <TrimMode>full</TrimMode>
       <PublishTrimmed>true</PublishTrimmed>
+      <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+      <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
   </PropertyGroup>
 
   <ItemGroup>
