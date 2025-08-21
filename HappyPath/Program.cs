@@ -9,6 +9,7 @@ namespace HappyPath
     public static class Program
     {
         [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(MainLayout))]
+        [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(Microsoft.AspNetCore.Components.LayoutView))]
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
