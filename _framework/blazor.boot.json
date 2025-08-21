@@ -1,10 +1,10 @@
 {
   "mainAssemblyName": "HappyPath",
   "resources": {
-    "hash": "sha256-Pd6aoTgK9Nf2s9Jo5I/uhRR3BVQ/3Q/tK/9aaGQkkGc=",
+    "hash": "sha256-PMrc+kF34JzyL0CrSlLJribFVjJEr7CBYFSYIIbPrZU=",
     "fingerprinting": {
       "Blazored.LocalStorage.38qqn0cc96.wasm": "Blazored.LocalStorage.wasm",
-      "Microsoft.AspNetCore.Components.6tp75xxaz0.wasm": "Microsoft.AspNetCore.Components.wasm",
+      "Microsoft.AspNetCore.Components.iqolo7tnps.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.gyrqbroldt.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
       "Microsoft.AspNetCore.Components.WebAssembly.6q1jpjgfcs.wasm": "Microsoft.AspNetCore.Components.WebAssembly.wasm",
       "Microsoft.Extensions.Configuration.zr9y6n6fms.wasm": "Microsoft.Extensions.Configuration.wasm",
@@ -34,7 +34,7 @@
       "System.Text.Json.h6jruwiato.wasm": "System.Text.Json.wasm",
       "System.Text.RegularExpressions.j5idjixed0.wasm": "System.Text.RegularExpressions.wasm",
       "System.Private.CoreLib.pj6od3bcfw.wasm": "System.Private.CoreLib.wasm",
-      "HappyPath.1n4apbu39n.wasm": "HappyPath.wasm",
+      "HappyPath.rj0lyhlzzp.wasm": "HappyPath.wasm",
       "dotnet.native.4kpiqsp2xj.js": "dotnet.native.js",
       "dotnet.native.bjdonifdn2.wasm": "dotnet.native.wasm",
       "dotnet.js": "dotnet.js",
@@ -55,7 +55,7 @@
     },
     "assembly": {
       "Blazored.LocalStorage.38qqn0cc96.wasm": "sha256-vcGOEW2bnYS2OolJzEv53m6WFkEaPNGKEk6eepFThvQ=",
-      "Microsoft.AspNetCore.Components.6tp75xxaz0.wasm": "sha256-lqi4buz8sTn4QGAlVHXzDlWWAgpW54UiWH33hcOALrk=",
+      "Microsoft.AspNetCore.Components.iqolo7tnps.wasm": "sha256-hmv58O2CZxqeL3bcWs0FSLjTP5h8jnM4qxkQJ4jelM4=",
       "Microsoft.AspNetCore.Components.Web.gyrqbroldt.wasm": "sha256-+PjdxQa1mH/8AeyDBepOC9wSpOeFvhhybGLkjTFE+GY=",
       "Microsoft.AspNetCore.Components.WebAssembly.6q1jpjgfcs.wasm": "sha256-fjQLv7QBHIpcSwll79hiQkBjYbjlubHRq6aKLOvoAVQ=",
       "Microsoft.Extensions.Configuration.zr9y6n6fms.wasm": "sha256-AfgiKXj2TZbhvV4OmBVd8zf36SdWtLxp9dIGGJ3QRbY=",
@@ -83,7 +83,7 @@
       "System.Text.Encodings.Web.yosxql6jn5.wasm": "sha256-fgKqJw0Vkd2XqqB/Aj8WLXZK9/DPfEX9FcsrTzQTRFU=",
       "System.Text.Json.h6jruwiato.wasm": "sha256-J2h8It3KEE7eVU+nR3IyBWHVxVMv0KvA7MTuDKKmYtc=",
       "System.Text.RegularExpressions.j5idjixed0.wasm": "sha256-J6gVQlJLN+R0E5iZkmnNo2oa+uAfRpd0gqBpGPI8sdc=",
-      "HappyPath.1n4apbu39n.wasm": "sha256-A2WPuZb366OW81HGhSqvFZKISxne+wLEyDr0ORvKtJ4="
+      "HappyPath.rj0lyhlzzp.wasm": "sha256-+bMutGOsaE/V8qd7iSgNKzmVWjYrwFny6/p+9Dfg078="
     }
   },
   "cacheBootResources": true,
